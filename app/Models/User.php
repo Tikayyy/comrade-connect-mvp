@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\User\HasBlockedUsers;
 use App\Traits\User\HasFriends;
+use App\Traits\User\HasServers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,6 +14,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasFriends, HasBlockedUsers;
+    use HasServers;
 
     /**
      * The attributes that are mass assignable.
