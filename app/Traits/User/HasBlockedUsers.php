@@ -2,7 +2,7 @@
 
 namespace App\Traits\User;
 
-use App\Enums\FriendshipStatus;
+use App\Enums\FriendshipStatusEnum;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,14 +13,14 @@ trait HasBlockedUsers
     {
         return $this->belongsToMany(User::class, "friendships", "initiator_user_id", "requested_user_id")
             ->withPivot("status")
-            ->wherePivot("status", FriendshipStatus::Blocked);
+            ->wherePivot("status", FriendshipStatusEnum::Blocked);
     }
 
     protected function thisUserFriendOfBlocked(): BelongsToMany
     {
         return $this->belongsToMany( User::class, "friendships", "requested_user_id", "initiator_user_id")
             ->withPivot("status")
-            ->wherePivot("status", FriendshipStatus::Blocked);
+            ->wherePivot("status", FriendshipStatusEnum::Blocked);
     }
 
     protected function loadBlockedFriends(): void

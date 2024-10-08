@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum FriendshipStatus: string
+enum FriendshipStatusEnum: string
 {
     case Pending = "pending";
     case Confirmed = "confirmed";

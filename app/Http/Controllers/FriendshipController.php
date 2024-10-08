@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Friendship\FriendsListRequest;
-use App\Http\Resources\UsersCollection;
+use App\Http\Resources\PublicUserResource;
 use App\Models\User;
 use App\Services\FriendshipService;
 
@@ -17,7 +17,7 @@ class FriendshipController extends Controller
     public function list(FriendsListRequest $request)
     {
         $friends = $this->friendshipService->getUserFriendsList();
-        return response()->json(UsersCollection::collection($friends));
+        return response()->json(PublicUserResource::collection($friends));
     }
 
     public function request(User $user)

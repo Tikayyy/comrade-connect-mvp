@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\FriendshipStatus;
+use App\Enums\FriendshipStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,7 +27,7 @@ class Friendship extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        "status" => FriendshipStatus::class,
+        "status" => FriendshipStatusEnum::class,
     ];
 
     public function initiator()

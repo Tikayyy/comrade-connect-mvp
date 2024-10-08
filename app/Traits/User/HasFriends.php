@@ -2,7 +2,7 @@
 
 namespace App\Traits\User;
 
-use App\Enums\FriendshipStatus;
+use App\Enums\FriendshipStatusEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
@@ -13,14 +13,14 @@ trait HasFriends
     {
         return $this->belongsToMany(User::class, "friendships", "initiator_user_id", "requested_user_id")
             ->withPivot("status")
-            ->wherePivot("status", FriendshipStatus::Confirmed);
+            ->wherePivot("status", FriendshipStatusEnum::Confirmed);
     }
 
     protected function thisUserFriendOf(): BelongsToMany
     {
         return $this->belongsToMany( User::class, "friendships", "requested_user_id", "initiator_user_id")
             ->withPivot("status")
-            ->wherePivot("status", FriendshipStatus::Confirmed);
+            ->wherePivot("status", FriendshipStatusEnum::Confirmed);
     }
 
     protected function loadFriends(): void

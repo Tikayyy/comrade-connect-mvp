@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\UserController;
@@ -43,6 +44,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('invite/{user}', [ServerController::class, 'invite']);
             Route::post('join', [ServerController::class, 'join']);
             Route::post('hide', [ServerController::class, 'hide']);
+
+            Route::prefix('channel')->group(function () {
+                Route::post('create', [ChannelController::class, 'create']);
+
+                Route::prefix('{channel}')->group(function () {
+                    Route::post('delete', [ChannelController::class, 'delete']);
+                });
+            });
         });
     });
 });

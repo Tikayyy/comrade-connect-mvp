@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Enums\FriendshipStatus;
+use App\Enums\FriendshipStatusEnum;
 use App\Models\User;
 use App\Repositories\FriendshipRepository;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +27,7 @@ class FriendshipService
         return $this->friendshipRepository->create([
             "initiator_user_id" => $this->authedUser->id,
             "requested_user_id" => $friend->id,
-            "status" => FriendshipStatus::Pending,
+            "status" => FriendshipStatusEnum::Pending,
         ]);
     }
 
@@ -35,7 +35,7 @@ class FriendshipService
     {
         $friendship = $this->friendshipRepository->getByUsers($friend, $this->authedUser);
         $data = $friendship->toArray();
-        $data['status'] = FriendshipStatus::Confirmed;
+        $data['status'] = FriendshipStatusEnum::Confirmed;
         $this->friendshipRepository->update($data['id'], $data);
     }
 
@@ -43,7 +43,7 @@ class FriendshipService
     {
         $friendship = $this->friendshipRepository->getByUsers($friend, $this->authedUser);
         $data = $friendship->toArray();
-        $data['status'] = FriendshipStatus::Pending;
+        $data['status'] = FriendshipStatusEnum::Pending;
         $this->friendshipRepository->update($data['id'], $data);
     }
 
@@ -57,7 +57,7 @@ class FriendshipService
     {
         $friendship = $this->friendshipRepository->getByUsers($friend, $this->authedUser);
         $data = $friendship->toArray();
-        $data['status'] = FriendshipStatus::Pending;
+        $data['status'] = FriendshipStatusEnum::Pending;
         $this->friendshipRepository->update($data['id'], $data);
     }
 }

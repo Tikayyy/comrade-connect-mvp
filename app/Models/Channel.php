@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use App\Enums\ServerVisabilityEnum;
+use App\Enums\ChannelTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Server extends Model
+class Channel extends Model
 {
     use HasFactory;
 
@@ -17,8 +16,9 @@ class Server extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        "server_id",
         "title",
-        "visability",
+        "type",
     ];
 
     /**
@@ -27,11 +27,6 @@ class Server extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        "visability" => ServerVisabilityEnum::class,
+        "type" => ChannelTypeEnum::class,
     ];
-
-    public function channels(): HasMany
-    {
-        return $this->hasMany(Channel::class, "server_id", "id");
-    }
 }
