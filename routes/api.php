@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,13 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'getMe']);
+
+    Route::prefix('friends')->group(function () {
+        Route::get('list', [FriendshipController::class, 'list']);
+        Route::post('request/{user}', [FriendshipController::class, 'request']);
+        Route::post('accept/{user}', [FriendshipController::class, 'accept']);
+        Route::post('hide/{user}', [FriendshipController::class, 'hide']);
+        Route::post('delete/{user}', [FriendshipController::class, 'delete']);
+        Route::post('block/{user}', [FriendshipController::class, 'block']);
+    });
 });
