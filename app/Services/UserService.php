@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
@@ -29,5 +30,10 @@ class UserService
         }
 
         return $user;
+    }
+
+    public function search(string $text): Collection
+    {
+        return $this->userRepository->search($text);
     }
 }

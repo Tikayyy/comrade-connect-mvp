@@ -24,7 +24,12 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('user', [UserController::class, 'getMe']);
+    Route::prefix('users')->group(function () {
+        Route::get('me', [UserController::class, 'getMe']);
+
+        Route::get('list', [UserController::class, 'list']);
+        Route::get('{user}', [UserController::class, 'get']);
+    });
 
     Route::prefix('friends')->group(function () {
         Route::get('list', [FriendshipController::class, 'list']);
