@@ -29,6 +29,23 @@ services:
         - POSTGRES_PASSWORD=comrade
         - POSTGRES_DB=comrade_connect_mvp
 
+  redis:
+      image: redis:latest
+      command: redis-server --appendonly yes
+      volumes:
+        - .docker/redis/data:/data
+      ports:
+        - 6379:6379
+
+  websocket:
+    restart: always
+    build: .docker/websocket
+    platform: linux/amd64
+    depends_on:
+      - nginx
+    ports:
+      - 3000:3000
+
   mailpit:
     image: axllent/mailpit:latest
     ports:
